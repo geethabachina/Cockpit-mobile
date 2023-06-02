@@ -1,0 +1,718 @@
+<ngx-spinner>
+  <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color: white;"></i>
+  <span class="sr-only">Loading...</span>
+</ngx-spinner>
+
+<div class="container" style="background: #e1e1e12b;height: 100vh;">
+    
+    <!-- <div class="fixed-header overflow-y">
+      <div  style="margin-bottom: -10px;display: flex;align-items: center; justify-content: space-between;">
+          <i style="color: #ffffff;margin-bottom: 4px;" routerLinkActive="active" routerLink="/core/map" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+          <h4  class="custom-title" style="font-family: 'Cedarville Cursive'">COCKPIT</h4>
+          <i style="color: #ffffff;margin-bottom: 4px;margin-right: -90px;" (click)="logout()" class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
+          <div></div>
+      </div>
+      <div style="text-align: center;">
+        <div style="background-color: white;color: black;font-weight: 600;" class="badge badge-pill badge-secondary">SCN : {{scn}}</div>
+      </div>
+    </div>  -->
+    
+ <div class="pt-3 pr-2">
+    <span style="color: #014a91;" (click)="back()"><i class="fa fa-arrow-circle-left fa-lg" aria-hidden="true"></i>  Back</span>
+    <span style="color: #014a91;float:right;" class="logout" (click)="logout()">Logout  <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></span>
+  </div>
+
+    <div class="d-flex align-items-baseline pt-3">
+        <h1 class="custom-title1 mb-0">Ever Cockpit </h1><span class="text-secondary ml-2" style="font-size:12px">SCN:{{scn}}</span>
+    </div>
+     
+    <!-- <div class="mb-4" style="justify-content: space-between;align-items: start; margin-top: 85px;"> -->
+    <div class="mb-4" style="justify-content: space-between;align-items: start; margin-top: 20px;">
+      <div class="row">
+        <div class="custom-card col-4">
+            <div class="custom-icon">
+               <img src="../../../assets/css/images/arrival.png" class="custom-img">
+            </div>
+            <div class="custom-content">
+              <h3 class="custom-para mb-0">ATB</h3>
+              <p class="custom-content-title mb-0">{{vesselInfo?.atbDate | date:"dd/MM/yyyy"}}</p>
+              <p class="custom-content-title">{{vesselInfo?.atbDate | date:"shortTime"}}</p>
+            </div>
+       </div>
+        <div class="custom-card col-4">
+            <div class="custom-icon">
+               <img src="../../../assets/css/images/departure.png" class="custom-img">
+            </div>
+            <div class="custom-content">
+              <h3 class="custom-para mb-0">ETD</h3>
+              <p class="custom-content-title mb-0">{{vesselInfo?.etdDate | date:"dd/MM/yyyy"}}</p>
+              <p class="custom-content-title">{{vesselInfo?.etdDate | date:"shortTime"}}</p>
+            </div>
+       </div>
+       <div class="custom-card col-4">
+          <div class="custom-icon">
+            <img src="../../../assets/css/images/wharf.png" class="custom-img">
+          </div>
+          <div class="custom-content">
+            <h3 class="custom-para mb-0">wharf</h3>
+            <p class="custom-content-title">{{vesselInfo?.wharfName}}</p>
+          </div>
+      </div>
+      </div>
+       <div class="row mt-2">
+          <div class="custom-card col-4">
+            <div class="custom-icon">
+              <img src="../../../assets/css/images/metermark.png" class="custom-img">
+            </div>
+            <div class="custom-content">
+              <h3 class="custom-para mb-0">Metermark</h3>
+              <p class="custom-content-title">{{vesselInfo?.startMeterMark}}-{{vesselInfo?.primary}}</p>
+            </div>
+          </div>
+          <div class="custom-card col-8">
+            <div class="custom-icon">
+              <img src="../../../assets/css/images/terminal.png" class="custom-img">
+            </div>
+            <div class="custom-content">
+              <h3 class="custom-para mb-0">Terminal</h3>
+              <p class="custom-content-title">{{vesselInfo?.terminalName}}</p>
+            </div>
+          </div>
+      </div>
+       
+    </div>
+    <!------------------------------------------------- Cargo information ---------------------------------------->
+    <div id="accordion" class="mb-4">
+      <div>
+        <div id="headingTwo" (click)="cargoInfoClick()">
+          <div class="d-flex justify-content-between custom-collapse mt-2 collapsed" data-toggle="collapse" data-target="#agentinformation" aria-expanded="false" aria-controls="agentinformation" >
+              <div class="d-flex align-items-center">
+                <!-- <span><i class="fa-regular fa-chevron-down"></i></span> -->
+              <span style="color: #014a91;"><i class="fa fa-chevron-down"></i></span>
+              <h6 class="ml-2 mb-0" style="font-size: 17px;font-weight: 600;color: #014a91;">Cargo Information</h6></div>
+              <!-- <span><i class="fa-regular fa-circle-info"></i></span> -->
+              <!-- <span style="color: #014a91;"><i class="fa fa-info-circle"></i></span> -->
+              <img src="../../../assets/css/images/cargo.png" class="custom-img">
+          </div>
+        </div>
+        
+        <div class="collapse mt-2" id="agentinformation" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card card-body">
+            <div class="row">
+              <div class="col-6 custom-content">
+                <h3 class="custom-para mb-0">Cargo Detail</h3>
+                <div *ngFor="let row of cargoInfo?.cargoDetailList">
+                  <span *ngIf="row?.cargoName" class="custom-content-title">{{row.cargoName}}</span>
+                  <span *ngIf="!row?.cargoName" class="custom-content-title">-</span>
+                </div>
+              </div>
+              <div class="col-6 custom-content">
+                <h3 class="custom-para mb-0">Cargo Owner</h3>
+                <div *ngFor="let row of cargoInfo?.cargoDetailList">
+                  <span *ngIf="row?.cargoOwner" class="custom-content-title">{{row.cargoOwner}}</span>
+                  <span *ngIf="!row?.cargoOwner" class="custom-content-title">-</span>
+                </div>
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6 custom-content">
+                <h3 class="custom-para mb-0">Operation</h3>
+                <div *ngFor="let row of cargoInfo?.cargoDetailList">
+                  <span *ngIf="cargoInfo?.operationType" class="custom-content-title">{{cargoInfo?.operationType}}</span>
+                  <span *ngIf="!cargoInfo?.operationType" class="custom-content-title">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!------------------------------------------------- Agent information ---------------------------------------->
+      <div>
+        <div id="heading3" (click)="agentInfoClick()">
+          <div class="d-flex justify-content-between custom-collapse mt-2 collapsed" data-toggle="collapse" data-target="#agentinformation1" aria-expanded="false" aria-controls="agentinformation1" >
+              <div class="d-flex align-items-center">
+                <!-- <span><i class="fa-regular fa-chevron-down"></i></span> -->
+              <span style="color: #014a91;"><i class="fa fa-chevron-down"></i></span>
+              <h6 class="ml-2 mb-0" style="font-size: 17px;font-weight: 600;color: #014a91;">Agent Information</h6></div>
+              <!-- <span><i class="fa-regular fa-circle-info"></i></span> -->
+              <span class="custom-img" style="text-align: center;"><i class="fa fa-user"></i></span>
+          </div>
+        </div>
+        
+        <div class="collapse mt-2" id="agentinformation1" aria-labelledby="heading3" data-parent="#accordion">
+          <div class="card card-body">
+            <!-- life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. -->
+            <div class="row">
+              <div class="col-6 custom-content">
+                <!-- <a [href]="'tel:' + e.Phone">{{ e.Phone }}</a> -->
+                <!-- <a href={{'tel:'+e.Phone}}>{{e.Phone}}</a> -->
+                <!-- <a href={{'tel:'+e.Phone}}>{{e.Phone | PhoneNumber}}</a> -->
+                <!-- <h3 class="custom-para mb-0">Shipping Agent&nbsp;&nbsp;&nbsp;<a href="tel:+60104213818"><i class="fa fa-phone-square fa-lg f-blue"></i></a></h3> -->
+                <h3 class="custom-para mb-0">Shipping Agent</h3>
+                <p *ngIf="agentInfo?.shippingAgent?.name" class="custom-content-title"  [ngClass]="{'f-blue' : agentInfo?.shippingAgent?.phone}" (click)="openCall('shipping')">{{agentInfo?.shippingAgent?.name}}</p>
+                <p *ngIf="!agentInfo?.shippingAgent?.name" class="custom-content-title">-</p>
+              </div>
+              <div class="col-6 custom-content">
+                <!-- <h3 class="custom-para mb-0">Stevedore&nbsp;&nbsp;&nbsp;<a href='tel:0104213818'><i class="fa fa-phone-square fa-lg f-blue"></i></a></h3> -->
+                <h3 class="custom-para mb-0">Stevedore</h3>
+                <p *ngIf="agentInfo?.stevedore?.name" class="custom-content-title" [ngClass]="{'f-blue' : agentInfo?.stevedore?.phone}" (click)="openCall('stevedore')">{{agentInfo?.stevedore?.name}}</p>
+                <p *ngIf="!agentInfo?.stevedore?.name" class="custom-content-title">-</p>
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6 custom-content">
+                <h3 class="custom-para mb-0">Tally</h3>
+                <p *ngIf="agentInfo?.tally?.name" class="custom-content-title" [ngClass]="{'f-blue' : agentInfo?.tally?.phone}" (click)="openCall('tally')">{{agentInfo?.tally?.name}}</p>
+                <p *ngIf="!agentInfo?.tally?.name" class="custom-content-title ">-</p>
+
+              </div>
+               <div class="col-6 custom-content">
+                <h3 class="custom-para mb-0">Forwarding Agent</h3>
+                <p class="custom-content-title">{{agentInfo?.forwardingAgent?.name}}</p>
+                <p *ngIf="!agentInfo?.forwardingAgent?.name" class="custom-content-title hand">-</p>
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col-6 custom-content">
+                <h3 class="custom-para mb-0">WIC/PE</h3>
+                <!-- <p class="custom-content-title f-blue" (click)="openCall()">{{agentInfo?.tally?.name}}</p> -->
+                <p class="custom-content-title hand">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+   <div class="custom-tabs">
+   <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-timeline-tab" (click)="tabClick('timeline')" data-toggle="tab" href="#nav-timeline" role="tab" aria-controls="nav-home" aria-selected="true">Timeline</a>
+        <a class="nav-item nav-link" id="nav-hatch-tab" (click)="tabClick('hatch')" data-toggle="tab" href="#nav-hatch" role="tab" aria-controls="nav-profile" aria-selected="false">Hatch</a>
+        <a class="nav-item nav-link" id="nav-tpgh-tab" (click)="tabClick('tpgh')" data-toggle="tab" href="#nav-tpgh" role="tab" aria-controls="nav-profile" aria-selected="false">TPGH</a>
+        <a class="nav-item nav-link" id="nav-voucher-tab" (click)="tabClick('vochers')" data-toggle="tab" href="#nav-voucher" role="tab" aria-controls="nav-profile" aria-selected="false">Vouchers</a>
+        <a class="nav-item nav-link" id="nav-delay-tab" (click)="tabClick('delay')" data-toggle="tab" href="#nav-delay" role="tab" aria-controls="nav-profile" aria-selected="false">Delay</a>
+        <a class="nav-item nav-link" id="nav-storage-tab" (click)="tabClick('storage')" data-toggle="tab" href="#nav-storage" role="tab" aria-controls="nav-profile" aria-selected="false">Storage</a>
+        <a class="nav-item nav-link" id="nav-resource-tab" (click)="tabClick('equipment')" data-toggle="tab" href="#nav-resource" role="tab" aria-controls="nav-profile" aria-selected="false">Equipment</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+    <!------------------------------------------------- Timeline ---------------------------------------->
+      <div class="tab-pane fade show active" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
+        <section class="">
+          <ul class="timeline-with-icons">
+            <li class="timeline-item mb-4">
+              <span class="timeline-icon">
+                <i class="fa fa-check"></i>
+              </span>
+        
+              <h5 class="fw-600 mb-0">Arrival Time</h5>
+              <div class="d-flex justify-content-between mt-2">
+                <div>
+                  <p class="mb-0" style=" color: #adb5bd;">Estimate</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.etaDate | date:"dd/MM/yyyy"}}, {{vesselInfo?.etaDate | date:"shortTime"}}</p>
+                </div>
+                <div>
+                  <p class="mb-0" style=" color: #adb5bd;">Actual</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.ataDate | date:"dd/MM/yyyy"}}, {{vesselInfo?.ataDate | date:"shortTime"}}</p>
+                </div>
+              </div>
+            </li>
+        
+            <li class="timeline-item mb-4">
+              <span class="timeline-icon">
+                <i class="fa fa-check"></i>
+              </span>
+              <h5 class="fw-600 mb-0">Berthing Time</h5>
+              <div class="d-flex justify-content-between mt-2">
+                <div>
+                  <p class="mb-0"  style=" color: #adb5bd;">Estimate</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.etbDate | date:"dd/MM/yyyy"}}, {{vesselInfo?.etbDate | date:"shortTime"}}</p>
+                </div>
+                <div>
+                  <p class="mb-0" style=" color: #adb5bd;">Actual</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.atbDate | date:"dd/MM/yyyy"}}, {{vesselInfo?.atbDate | date:"shortTime"}}</p>
+                </div>
+              </div>
+            </li>
+
+             <li class="timeline-item mb-4">
+              <span class="timeline-icon">
+                <i class="fa fa-check"></i>
+              </span>
+              <h5 class="fw-600 mb-0">Start & Stop Work</h5>
+              <div class="d-flex justify-content-between mt-2">
+                <div>
+                  <p class="mb-0"  style=" color: #adb5bd;">Start</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.startWork | date:"dd/MM/yyyy"}}, {{vesselInfo?.startWork | date:"shortTime"}}</p>
+                </div>
+                <div>
+                  <p class="mb-0" style=" color: #adb5bd;">Stop</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.stopWork | date:"dd/MM/yyyy"}}, {{vesselInfo?.stopWork | date:"shortTime"}}</p>
+                </div>
+              </div>
+            </li>
+        
+            <li class="timeline-item after-none">
+              <span class="timeline-icon">
+              <i class="fa fa-check"></i>
+              </span>
+              <h5 class="fw-600 mb-0" >Departure Time</h5>
+              <div class="d-flex justify-content-between mt-2">
+                <div>
+                  <p class="mb-0" style=" color: #adb5bd;">Estimate</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.etdDate | date:"dd/MM/yyyy"}}, {{vesselInfo?.etdDate | date:"shortTime"}}</p>
+                </div>
+                <div>
+                  <p class="mb-0" style=" color: #adb5bd;">Actual</p>
+                  <p class="mb-0 fw-600 fs-12" style="font-weight: 500;">{{vesselInfo?.atdDate | date:"dd/MM/yyyy"}}, {{vesselInfo?.atdDate | date:"shortTime"}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <!------------------------------------------------- Hatch ---------------------------------------->
+      <div class="tab-pane fade" id="nav-hatch" role="tabpanel" aria-labelledby="nav-hatch-tab">
+        <!-- <div class="row">
+          <div class="col-6 custom-content">
+               <img style="height:140px;width:140px" src="../../../assets/css/images/ship-export.png" class="custom-img">
+          </div>
+           <div class="col-6 custom-content">
+               <img style="height:140px;width:140px" src="../../../assets/css/images/ship-import.png" class="custom-img">
+          </div> 
+        </div>    -->
+
+        <div class="text-center">
+          <span><b>Discharge</b></span>
+          <p>{{hatchData?.totalDischarge}}</p>
+        </div>
+        <div class="row">
+          <div class="col-3 pt-5 pl-5">
+            <span><b>Total</b></span>
+            <p>{{hatchData?.totalWeight}}</p>
+          </div>
+          <div class="col-9">
+            <img *ngIf="hatchData?.type=='IMPORT'" style="height:140px;width:140px" src="../../../assets/css/images/ship-import.png" class="custom-img">
+            <img *ngIf="hatchData?.type=='EXPORT'" style="height:140px;width:140px" src="../../../assets/css/images/ship-export.png" class="custom-img">
+          </div>
+        </div>   
+        <div class="text-center pt-3">
+          <span><b>Balance</b></span>
+          <p>{{hatchData?.totalBalanceWeight}}</p>
+        </div> 
+
+        <!-- <div class="text-center">
+          <span><b>Total</b></span>
+          <p>{{hatchData?.totalWeight}}</p>
+        </div>
+        <div class="row">
+          <div class="col-3 pt-5 pl-3">
+            <span><b>Discharge</b></span>
+            <p>{{hatchData?.totalDischarge}}</p>
+          </div>
+          <div class="col-6">
+            <img *ngIf="hatchData?.type=='IMPORT'" style="height:140px;width:140px" src="../../../assets/css/images/ship-import.png" class="custom-img">
+            <img *ngIf="hatchData?.type=='EXPORT'" style="height:140px;width:140px" src="../../../assets/css/images/ship-export.png" class="custom-img">
+          </div>
+          <div class="col-3 pt-5 pl-1">
+            <span><b>Balance</b></span>
+            <p>{{hatchData?.totalBalanceWeight}}</p>
+          </div>
+        </div>   --> 
+
+        <div class="pt-2">
+          <button class="btn btn-primary" (click)="hatchInfoClick()">
+            <p class="mb-0">More Info</p>
+          </button>
+        </div> 
+        <div *ngIf="hatchTableShow" class="common-table pt-2"> 
+          <table class="table" style="border: 1px solid #dee2e6;font-size: 13px;">
+                  <thead style="background: orange;">
+                  <tr>
+                      <th scope="col">
+                          <span>Hatch No.</span>
+                      </th>
+                      <th scope="col">
+                          <span>Total</span>
+                      </th>
+                      <th scope="col">
+                          <span>Balance</span>
+                      </th>
+                      <th scope="col">
+                        <span>%</span>
+                      </th>
+                  </tr>
+                  </thead>
+                  <tbody class="table-f-color">
+                  <tr *ngFor="let row of hatchData?.hatchInfo">
+                      <td>{{row?.hatchNo}}</td>
+                      <td>{{row?.weight}}</td>
+                      <td>{{row?.balanceWeight}}</td>
+                      <td>{{row?.percent}}</td>
+                  </tr>
+                  </tbody>
+              </table>
+        </div>
+      
+      </div>
+      <!------------------------------------------------- TPGH ---------------------------------------->
+      <div class="tab-pane fade" id="nav-tpgh" role="tabpanel" aria-labelledby="nav-tpgh-tab">
+        <div class="row custom-content">
+              <!-- <img style="height:100%;width:100%" src="../../../assets/css/images/tpgh.PNG" class="custom-img"> -->
+              <ngx-charts-gauge
+                [view]="view1"
+                [scheme]="colorScheme1"
+                [results]="single1"
+                [legend]="legend"
+                [legendPosition]="legendPosition"
+                >
+              </ngx-charts-gauge>
+        </div>     
+        <ul style="margin-top: 70px !important">
+          <li class="f-blue" style="font-weight:bold;">Date 1</li>
+          <ul>
+            <li class="f-maroon" style="font-weight:bold;">Shift 1</li>
+              <ul>
+                <li>Hatch 1</li>
+                  <div class="row custom-content">
+                    <img style="height:100%;width:100%" src="../../../assets/css/images/tpgh.PNG" class="custom-img">
+                  </div>   
+                <li>Hatch 2</li>
+                  <div class="row custom-content">
+                    <img style="height:100%;width:100%" src="../../../assets/css/images/tpgh.PNG" class="custom-img">
+                  </div> 
+                <li>Hatch 3</li>
+                  <div class="row custom-content">
+                    <img style="height:100%;width:100%" src="../../../assets/css/images/tpgh.PNG" class="custom-img">
+                  </div> 
+              </ul>
+            <li class="f-maroon" style="font-weight:bold;">Shift 2</li>
+              <ul>
+                <li>Hatch 1</li>
+                  <div class="row custom-content">
+                    <img style="height:100%;width:100%" src="../../../assets/css/images/tpgh.PNG" class="custom-img">
+                  </div> 
+                <li>Hatch 2</li>
+                  <div class="row custom-content">
+                    <img style="height:100%;width:100%" src="../../../assets/css/images/tpgh.PNG" class="custom-img">
+                  </div> 
+                <li>Hatch 3</li>
+                  <div class="row custom-content">
+                    <img style="height:100%;width:100%" src="../../../assets/css/images/tpgh.PNG" class="custom-img">
+                  </div> 
+              </ul>
+            <li class="f-maroon" style="font-weight:bold;">Shift 3</li>
+            <ul>
+              <li>Hatch 1</li>
+              <li>Hatch 2</li>
+              <li>Hatch 3</li>
+            </ul>
+          </ul>
+          <li class="f-blue" style="font-weight:bold;">Date 2</li>
+          <li class="f-blue" style="font-weight:bold;">Date 3</li>
+        </ul> 
+      </div>
+      <!------------------------------------------------- Vouchers ---------------------------------------->
+      <div class="tab-pane fade" id="nav-voucher" role="tabpanel" aria-labelledby="nav-voucher-tab">
+        <!-- <div class="row" style="margin-bottom: 5rem!important;">
+         <div class="col-12 custom-content">
+              <h3 class="custom-content-title" style="font-size: 14px;">Service Request</h3>
+              <ngx-charts-gauge
+                [view]="view1"
+                [scheme]="colorScheme1"
+                [results]="single2"
+                [legend]="legend"
+                [legendPosition]="legendPosition"
+                >
+              </ngx-charts-gauge>
+         </div>
+       </div> -->
+       <div class="row">
+        <div class="col-12 custom-content">
+             <!-- <h3 class="custom-content-title" style="margin-bottom: -120px;margin-top: 10px;font-size: 14px;">Service Request</h3> -->
+             <h3 class="custom-content-title" style="font-size: 14px;">Service Request</h3>
+             <!-- <img style="height:140px;width:140px" src="../../../assets/css/images/pie2.PNG" class="custom-img"> -->
+             <!-- <ngx-charts-advanced-pie-chart
+               [view]="view"
+               [scheme]="colorScheme"
+               [results]="single"
+               [gradient]="gradient"
+               >
+             </ngx-charts-advanced-pie-chart> -->
+
+             <!-- [results]="vochershData?.statusList"
+                  [tooltipText]="pieTooltipText"-->
+ 
+             <ngx-charts-pie-chart
+                [view]="viewVouchers"
+                [scheme]="colorSchemeVouchers"
+                [gradient]="gradient"
+                [results]="vochershData?.statusList"
+                [doughnut]="isDoughnut"
+                [arcWidth]="0.40"
+                [legend] = true
+                [maxLabelLength]="100"                
+              >
+            </ngx-charts-pie-chart> 
+
+        </div>
+      </div>
+      <!-- <div class="pt-2" style="margin-top: -100px;"> -->
+      <div class="pt-2">
+        <button class="btn btn-primary" (click)="vouchersInfoClick()">
+          <p class="mb-0">More Info</p>
+        </button>
+      </div> 
+      <!-- <div *ngIf="vouchersTableShow" class="common-table table-responsive pt-2">          -->
+      <div *ngIf="vouchersTableShow" class="common-table  pt-2" style="max-width: 530px;overflow: auto;"> 
+        <table class="table" style="border: 1px solid #dee2e6;font-size: 13px;">
+                <thead style="background: orange;">
+                <tr>
+                    <th scope="col">
+                        <span>Service Name</span>
+                    </th>
+                    <th scope="col">
+                        <span>Date Required</span>
+                    </th>
+                    <th scope="col">
+                        <span>Status</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="table-f-color">
+                <tr *ngFor="let row of vochershData?.voucherInfoList">
+                    <td>{{row?.serviceName}}</td>
+                    <td>{{row?.dateRequired}}</td>
+                    <td>{{row?.status}}</td>
+                </tr>
+                </tbody>
+            </table>
+      </div>
+     </div>
+      <!------------------------------------------------- Delay ---------------------------------------->
+      <div class="tab-pane fade" id="nav-delay" role="tabpanel" aria-labelledby="nav-delay-tab">
+        <div class="common-table"> 
+          <table class="table" style="border: 1px solid #dee2e6;font-size: 13px;">
+                  <thead style="background: orange;">
+                  <tr>
+                      <th scope="col">
+                          <span>Category</span>
+                      </th>
+                      <th scope="col">
+                          <span>Hour</span>
+                      </th>
+                      <th scope="col">
+                          <span>Reason</span>
+                      </th>
+                  </tr>
+                  </thead>
+                  <tbody class="table-f-color">
+                  <tr *ngFor="let row of delayData?.delaySummaryList">
+                      <td>{{row.delayCategory}}</td>
+                      <td>{{row.delayHour}}</td>
+                      <td>{{row.delayReason}}</td>
+                  </tr>
+                  </tbody>
+              </table>
+
+              <div class="pt-1 pb-1">
+                <button class="btn btn-primary" (click)="delayRowClick()">
+                  <p class="mb-0">More Info</p>
+                </button>
+              </div> 
+
+              <div class="table-responsive"> 
+              <table *ngIf="delayTableShow" class="table mb-0" style="border: 1px solid #dee2e6;font-size: 13px;">
+                <thead style="background: orange;">
+                <tr>
+                    <th scope="col">
+                      <span>Date</span>
+                    </th>
+                    <th scope="col">
+                      <span>Shift</span>
+                    </th>
+                    <th scope="col">
+                        <span>Category</span>
+                    </th>
+                    <th scope="col">
+                      <span>Reason</span>
+                    </th>
+                    <th scope="col">
+                      <span>Start Time</span>
+                    </th>
+                    <th scope="col">
+                      <span>End Time</span>
+                    </th>
+                    <th scope="col">
+                      <span>Hour</span>
+                    </th>
+                    <th scope="col">
+                      <span>Bill To</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody *ngFor="let row of delayData?.delayDetailList"class="table-f-color">
+                  <!-- <div > -->
+                    <tr *ngFor="let row2 of row?.delayDetailPerShiftInADayList">
+                        <td>{{row2?.date}}</td>
+                        <td>{{row2?.shift}}</td>
+                        <td>{{row2?.delayCategory}}</td>
+                        <td>{{row2?.delayReason}}</td>
+                        <td>{{row2?.startTime}}</td>
+                        <td>{{row2?.endTime}}</td>
+                        <td>{{row2?.delayHour}}</td>
+                        <td>{{row2?.billTo}}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td><b>Total Delay</b></td>
+                      <td><b>{{row?.totalDelayHourPerShiftInADay}}</b></td>
+                      <td><b>Hour</b></td>
+                    </tr>
+                  <!-- </div> -->
+                </tbody>
+            </table> 
+              </div>
+          </div>
+      </div>
+      <!------------------------------------------------- Storage ---------------------------------------->
+      <div class="tab-pane fade" id="nav-storage" role="tabpanel" aria-labelledby="nav-storage-tab">
+        <div class="row">
+          <div class="col-6">
+               <h3 class="custom-content-title mb-2"><b>Declared</b></h3>
+               <!-- <p style="text-align: center;margin-bottom: -25px;">Total : {{declaredResults[0].total|number: '2.'}}</p> -->
+               <p style="text-align: center;margin-bottom: -25px;">Total : {{declaredResults[0]?.total}}</p>
+               <ngx-charts-pie-grid 
+               [results]="declaredResults"
+               [view]="viewStorage"
+               [scheme]="colorSchemeDeclared"
+               [designatedTotal]="declaredResults[0]?.total"
+               [label]="'Declared'"
+             > </ngx-charts-pie-grid>          
+          </div>
+          <div class="col-6">
+               <h3 class="custom-content-title mb-2"><b>Handled</b></h3>
+               <p style="text-align: center;margin-bottom: -25px;">Total : {{handledResults[0]?.total}}</p>
+               <ngx-charts-pie-grid 
+               [results]="handledResults"
+               [view]="viewStorage"
+               [scheme]="colorSchemeHandled"
+               [designatedTotal]="handledResults[0]?.total"
+               [label]="'Handled'"
+             > </ngx-charts-pie-grid>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+               <h3 class="custom-content-title mb-2"><b>Receiving</b></h3>
+               <p style="text-align: center;margin-bottom: -25px;">Total : {{receivingResults[0]?.total}}</p>
+               <ngx-charts-pie-grid 
+               [results]="receivingResults"
+               [view]="viewStorage"
+               [scheme]="colorSchemeReceiving"
+               [designatedTotal]="receivingResults[0]?.total"
+               [label]="'Receiving'"
+             > </ngx-charts-pie-grid>          
+          </div>
+          <div class="col-6">
+               <h3 class="custom-content-title mb-2"><b>Balance</b></h3>
+               <p style="text-align: center;margin-bottom: -25px;">Total : {{balanceResults[0]?.total}}</p>
+               <ngx-charts-pie-grid 
+               [results]="balanceResults"
+               [view]="viewStorage"
+               [scheme]="colorSchemeBalance"
+               [designatedTotal]="balanceResults[0]?.total"
+               [label]="'Handled'"
+             > </ngx-charts-pie-grid>
+          </div>
+        </div>
+
+       
+        <div class="common-table pt-3" style="max-width: 530px;overflow: auto;"> 
+          <table class="table" style="border: 1px solid #dee2e6;font-size: 13px;">
+          <thead style="background: orange;">
+            <tr style="text-align: center;">
+              <th colspan="4">ACTUAL</th>
+            </tr>
+            <tr>
+              <th scope="col">
+                <span>Location</span>
+              </th>
+              <th scope="col">
+                  <span>No PKGs</span>
+              </th>
+              <th scope="col">
+                  <span>No PCs</span>
+              </th>
+              <th scope="col">
+                  <span>WGT</span>
+              </th>
+          </tr>
+          </thead>
+          <tbody class="table-f-color">
+          <tr *ngFor="let row of storageData?.storageDetails">
+            <td>{{row?.locationName}}</td>
+            <td>{{row?.packages}}</td>
+            <td>{{row?.pieces}}</td>
+            <td>{{row?.weight}}</td>
+          </tr>
+          <!-- <tr>
+            <td colspan="3" style="text-align: center;">No record found</td>
+          </tr> -->
+          </tbody>
+        </table> 
+        </div>
+      </div>
+      <!------------------------------------------------- Equipment ---------------------------------------->
+      <div class="tab-pane fade" id="nav-resource" role="tabpanel" aria-labelledby="nav-resource-tab">
+          <div class="row custom-content">
+            <h3 class="custom-content-title mb-2">No Of Equipment</h3>
+               <!-- <img style="height:100%;width:100%" src="../../../assets/css/images/pie1.PNG" class="custom-img"> -->
+              <div class="pl-3">
+                <ngx-charts-gauge
+                [view]="equipmentView"
+                [scheme]="colorScheme1"
+                [results]="equipmentResults"
+                [legend]="equipmentLegendShow"
+                [legendPosition]="legendPosition"
+                >
+              </ngx-charts-gauge>
+              </div> 
+          </div>
+        <div class="common-table" style="max-width: 530px;overflow: auto;"> 
+          <table class="table" style="border: 1px solid #dee2e6;font-size: 13px;">
+          <thead style="background: orange;">
+            <tr>
+              <th scope="col">
+                  <span>No</span>
+              </th>
+              <th scope="col">
+                  <span>Equipment Type</span>
+              </th>
+              <th scope="col">
+                  <span>Quantity</span>
+              </th>
+              <th scope="col">
+                <span>Bill To</span>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="table-f-color">
+          <tr *ngFor="let row of equipmentData?.equipmentDetailDto">
+            <td>{{row?.no}}</td>
+            <td>{{row?.equipmentType}}</td>
+            <td class="text-center">{{row?.quantity}}</td>
+            <td>{{row?.billTo}}</td>
+            <!-- <td colspan="4" style="text-align: center;">No record found</td> -->
+          </tr>
+          </tbody>
+        </table> 
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

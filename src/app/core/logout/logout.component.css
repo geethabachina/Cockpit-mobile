@@ -1,0 +1,144 @@
+
+/* mobile */
+.btn-width{
+    margin-top: 16px;
+    width: 120px;
+  }
+  .back{
+    margin-left: -210px !important;
+    margin-top: 15px;
+    margin-bottom: -20px;
+  }
+  .back-color{
+    color: white;
+  }
+  .table-f-color{
+    color: white;
+  }
+  .bg-login.slider-profile{width: 80% !important; }
+ 
+  /* desktop */
+  @media only screen and (min-width: 415px) {
+    .loginbox {
+      background: #f8f9fa;
+      border-radius: 30px;
+      padding: 3vw;
+    }
+    .btn-width{
+      margin-top: 16px;
+      width: 130px;
+    }
+    .back{
+        margin-left: -235px !important;
+        margin-top: 15px;
+        margin-bottom: -20px;
+    }
+    .back-color{
+        color: #2196F3;
+    }
+    .table-f-color{
+        color: black;
+    }
+  }
+  .form-signin1{
+    max-width: 530px;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .subtitle {
+    color: #66ccff;
+    margin-top: 4vh;
+    font-size: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-bottom: 0;
+    font-weight: bolder;
+  }
+  
+  .subtitle1 {
+  color: black;
+  margin-top: 4vh;
+  font-size: 11px;
+  padding-left: 27px;
+  padding-right: 53px;
+  /* padding-top: 25px; */
+  padding-bottom: 25px;
+  margin-bottom: 0;
+  font-weight: bolder;
+  }
+  
+  .form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  .label {
+    display: inline-block;
+    margin-top: 0.5rem;
+    float: left;
+  }
+  .ijm_logo {
+    max-width: 50%;
+    margin-top: 5vh;
+  }
+  .bg-login{
+    /* background-image:linear-gradient(rgba(245,70,66, 0.75),rgba(8,83,156, 0.75)); */
+    background-image: linear-gradient(#410170,rgb(12 0 14 / 85%));
+    height: 100%;
+    width: 100%;
+    position: fixed;
+  }
+  /* .labelStyle{
+    display: inline-block;
+    margin-top: 0.5rem;
+    float: left;
+    font-family:Open sans-serif;
+    color: blue;
+    font-weight: bold;
+  } */
+  
+  /* .btn-primary{
+    background: #1fb8da;
+    border: none;
+  } */
+  .text-unactive {
+    color: #cbcbcb;
+    font-weight: 300;
+  }
+  .nav-link {
+    color: black !important;
+    font-weight: 300;
+    font-size: 13px;
+  }
+  a {
+    color: #58626b;
+  }
+  
+  .nav-secondary a.active {
+    border-bottom: solid #f7a941 2px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+  }
+  
+  .nav-secondary-white a.active {
+    color: #2a3a43 !important;
+  }
+  .nav-secondary-purple a.active {
+    color: rgb(255, 255, 255) !important;
+  }
+  
+  .team-tabs a.active {
+    color: #f7a941;
+  }
+
+
+.form-control{
+    font-size: 13px;
+}
+
+
+

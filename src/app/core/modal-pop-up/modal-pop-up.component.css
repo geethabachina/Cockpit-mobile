@@ -1,0 +1,10 @@
+.acc-dec-icon {
+    width: 30px !important;
+}
+.custom-form {
+    color: #6c757d !important;
+    background-color: transparent !important;
+    border-radius: 20px !important;
+    border: 1px solid #adb5bd !important;
+}
+::placeholder { color: #2a3a43 !important; opacity: 0.5;}

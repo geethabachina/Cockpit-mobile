@@ -1,0 +1,76 @@
+.custom-card{    display: flex; justify-content: space-between;}
+.custom-icon{display: table-cell;padding-inline-end: 8px;vertical-align: top;}
+.custom-content{ display: table-cell;  width: 100%; vertical-align: top;}
+.custom-title1{font-size: 20px;
+    font-weight: 600;
+    color: #014a91;}
+.custom-content-title{font-size: 12px;font-weight: 600;margin-bottom: 6px;}
+.custom-para{font-size: 12px; margin-bottom: 0;}
+.custom-img{background: #c6e1f7a8; padding: 4px;width: 30px;height: 30px; border-radius: 5px;}
+.custom-collapse{background: white;
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+}
+.custom-collapse .card {box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);}
+.custom-tabs .tab-content>.active {
+    background: #fff;
+    padding: 16px 10px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;}
+.custom-tabs .nav-tabs{ border: 0  !important;}
+.custom-tabs .nav-tabs .nav-link.active{color: #014a91 !important;border-bottom: 2px solid #014a91;border-left: 0 ;
+    border-top:0 !important;border-right: 0 !important;font-weight: 600;}
+.custom-tabs .nav-tabs, .custom-tabs .tab-content{font-size: 14px;}
+.custom-tabs .tab-content{box-shadow:0 3px 10px rgb(0 0 0 / 20%)}
+.custom-tabs .nav-tabs .nav-link{color: #919191;}
+
+.timeline-with-icons {
+    position: relative;
+    list-style: none;
+    margin-left: 14px;
+    padding-left: 32px;
+  }
+  .fs-12{font-size: 12px;}
+  
+  .timeline-with-icons .timeline-item {
+    position: relative;
+  }
+  
+  .timeline-with-icons .timeline-item:after {
+    position: absolute;
+    display: block;
+    top: 30px;
+  }
+  .timeline-item.after-none::after{content: none !important;}
+  .timeline-item::after{
+    content: '';
+      height: 60px;
+      width: 1px;
+      background-color: #b7b6b6;
+      display: inherit;
+      margin-left: -32px;}
+  .timeline-item h5{font-size: 14px;font-weight: 600}
+  .timeline-with-icons .timeline-icon {
+    position: absolute;
+    left: -48px;
+    background-color: hsl(217, 88.2%, 90%);
+    color: hsl(217, 88.8%, 35.1%);
+    border-radius: 50%;
+    height: 31px;
+    width: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-link {
+    display: block;
+    padding: 0.5rem 0.5rem;
+  }
+  .f-blue{
+    color: rgb(38 38 191);
+  }
+  .f-maroon{
+    color: #dc3545;
+  }
+  

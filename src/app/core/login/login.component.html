@@ -1,0 +1,44 @@
+<ngx-spinner>
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color: white;"></i>
+    <span class="sr-only">Loading...</span>
+</ngx-spinner>
+
+<section>
+      <div class="bg-login">
+          <form class="form-signin1" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <h1 class="h3 mb-3" style="padding-top: 180px;"><img style="height: 150px;" src="assets/css/images/cockpit-logo-white.png"></h1>
+              <!-- <h1 class="mb-2"  style="color: white;font-family: 'Cedarville Cursive';padding-top: 190px;padding-right: -22px;text-align: center;">KP</h1> -->
+              <h3 class="subtitle1" style="color: white; margin-top: -50px;">Kuantan Port Consortium Sdn Bhd</h3>
+              <p *ngIf="errorMsgShow" style="color: red;font-size: 12px;">Please enter username and password</p>
+              <p *ngIf="invalidMsgShow" style="color: red;font-size: 12px;">Invalid Username or Password</p>
+              <div class="loginbox">
+                  <div class="mb-4">
+                    <input style="font-family:Open sans-serif" [(ngModel)]="username"  type="text" class="form-control custom-form mainLoginInput" [(ngModel)]="username" placeholder="&#61447;  Username" formControlName="username" autofill="false" [ngClass]="{ 'is-invalid': loginForm.controls['username'].touched && loginForm.controls['username'].invalid }">
+                    <div *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid" class="alert">
+                        <div *ngIf="loginForm.controls['username'].errors && loginForm.controls['username'].errors['required']">is required.</div>
+                    </div>
+                </div>
+                 <div class="mb-4">
+                    <div class="password-container">
+                        <input style="font-family:Open sans-serif" [(ngModel)]="password"  [type]="hide ? 'password' : 'text'" class="form-control custom-form mainLoginInput" placeholder="&#61475;  Password" formControlName="password" autofill="false" [ngClass]="{ 'is-invalid': loginForm.controls['password'].touched && loginForm.controls['password'].invalid }">
+                        <i [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-solid fa-eye'" id="eye" (click)="showPassword()"></i>
+                    </div>
+                    <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid" class="alert">
+                        <div *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].errors['required']">is required.</div>
+                    </div>
+                  </div>
+
+                  <div style="text-align: center;">
+                      <button type="submit" class="btn btn-primary custom-btn" style="width: 100%;" (click)="onSubmit()">Log In</button>
+                  </div>
+
+                  <!-- <div align="right">
+                  <br>
+                  <h4 color="#2E2E2E" style="font-size: 12px;">Version 1.38.5</h4>
+                  </div> -->
+              </div>
+              <!-- <img class="mb-4 ijm_logo" style="color: white;" src="assets/css/images/ijm_logo.png"> -->
+              <!-- <p class="mt-1 text-white small copyright" style="text-align: center;">© Copyright Privaports Sdn Bhd. All Rights Reserved.</p> -->
+          </form>
+      </div>
+</section>

@@ -1,0 +1,51 @@
+  /* desktop */
+@media only screen and (min-width: 916px) {
+    .notShow{
+      display: none;
+    }
+}
+.footer-menu{
+    text-align: center;background-color: #f8f9fa;height: 60px;position: absolute;padding: 10px;bottom: 0;left: 0; right: 0;
+    border-top: 1px solid #f2f2f2;box-shadow: rgb(0 0 0 / 13%) 0px 3px 16px;}
+.footer-icons .btn{color: #5126ec;font-size: 18px;}
+.footer-icons .btn1:hover,.bg-color-blue {
+    background: rgba(81,38,236,1)  !important;
+    /* background: linear-gradient(78deg, rgba(81,38,236,1) 0%, rgb(152 116 240) 47%, #d598d3 100%) !important; */
+    color: white !important;border-radius: 10px;
+}
+
+
+
+/* .btn1:focus {
+    background-color: red;
+    color: white;
+}
+.btn1:active {
+    background-color:red;
+    color: white;
+}
+.btn1:visited {
+    background-color:red;
+    color: white;
+} */
+
+.bgcolor a.active {
+    background-color:#0B257F;
+    color: white;
+}
+/* .bg-color-blue{
+    background-color:#0B257F;
+    color: white;
+} */
+
+.no-bk {
+    background-color: transparent !important;
+    border-bottom: 0px !important;
+    border: 0px !important;
+}
+.acc-dec-icon {
+    width: 30px;
+}
+.mauto {
+    margin: 0 auto;
+}

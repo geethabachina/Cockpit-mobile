@@ -1,0 +1,167 @@
+<div style="position: relative;">
+    <!-- start -->
+    <!-- <div style="position: absolute;z-index:9999;width: 100%;"> -->
+    <div style="position: absolute;z-index:2222;width: 100%;">
+        <div class="col-12 p-2">
+            <div class="password-container">
+                <input style="font-family:Open sans-serif;height: calc(1.5em + 0.75rem + 6px);color: black;" (keyup)="search($event)" type="text" [(ngModel)]="searchValue" class="form-control" placeholder="Search..."  [ngModelOptions]="{standalone: true}">
+                <i *ngIf="!searchValue" class="fa fa-search"></i>
+                <i *ngIf="searchValue" class="fa fa-times-circle-o" (click)="clearValue()"></i>
+            </div>  
+        </div>
+        <div class="col-12">
+          <div *ngIf='showDropDown' (clickOutside)="closeDropDown()">
+              <div  class='search-drop-down' style="width: 35%;">
+                  <div class='search-results' (click)='selectValue(row)' *ngFor="let row of searchData">
+                              {{row.scn}} - {{row.vesselName}}
+                  </div>
+              </div>
+           </div>
+        </div>
+        <!-- <div class="d-flex" style="width:100%;padding: 4px 10px;" > -->
+        <div class="d-flex" style="width:100%;padding: 3px 25px 4px 7px" >
+            <div class="col-4 btn-style" (click)="selectDrop()">
+              <span style="font-weight: 600;"><i class="fa fa-picture-o"></i>  Berth</span>
+            </div>
+            <div class="col-4 btn-style" (click)="selectDrop1()">
+              <span style="font-weight: 600;"><i class="fa fa fa-anchor"></i>  Anchorage</span>
+            </div>
+            <div class="col-4 btn-style" (click)="selectDrop2()">
+                <span style="font-weight: 600;"><i class="fa fa-stack-overflow"></i>  Status</span>
+            </div>
+        </div>
+          <!--<div style="margin-left: -35px;">
+           <ngx-charts-pie-chart
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="single"
+                [gradient]="gradient"
+                [doughnut]="isDoughnut"
+                [arcWidth]="0.60"
+                [legend] = false
+                >
+            </ngx-charts-pie-chart> 
+        </div>-->
+    </div>
+    <!-- end -->
+
+     
+   
+    <!-- agm map -->
+    <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude">
+        </agm-marker>
+    </agm-map> -->
+
+    <!-- <img style="height: 750px;width: 360px;" src="../../../../assets/css/images/googlemap2.PNG" alt=""> -->
+
+    <!-- leaflet -->
+    <div class="map-container">
+        <div class="map-frame">
+          <div id="map"
+          ></div>
+        </div>
+    </div>
+
+    <!-- <div id="map"
+     leaflet
+     [leafletOptions]="mapOptions"
+     (leafletMapReady)="onMapReady($event)"
+     [leafletMarkerCluster]="markerClusterData"
+    ></div> -->
+
+
+    <!-- <div *ngIf='showDropUp1' class="dropup" style="position: absolute; bottom:0px;width: 100%;background: #fff;max-height: 350px;overflow: scroll;"> -->
+    <div *ngIf='showDropUp1' class="dropup" style="position: fixed; bottom:0px;width: 100%;background: #fff;max-height: 350px;overflow: scroll;z-index: 99999;border-radius: 32px 32px 0 0;box-shadow: 10px 5px 25px #000;">
+        <div style="display: flex;">
+            <div style="list-style: none; padding: 10px 13px; margin-bottom: 0;margin-top: 15px;font-size: 14px;">
+                <div *ngFor="let row of berthAnchorageList?.vesselBerthList" class="d-flex">
+                    <div class="txt-trunc1" style="width:170px;font-weight: bold;">{{row?.vesselName}}</div>
+                    <div style="width:85px">SCN: {{row?.scn}}</div>
+                    <div class="txt-trunc3" style="width:60px">{{row?.wharfName}}</div>
+                    <i class="fa fa-flag" style="color: green;"></i>
+                </div>
+            </div>
+            <div><i *ngIf="showDropUp1" style="margin-bottom: -25px;" class="fa fa-window-minimize" (click)="clearValue()"></i></div>
+        </div>
+    </div>
+
+    <!-- <div *ngIf='showDropUp2' class="dropup" style="position: absolute; bottom:0px;width: 100%;background: #fff;max-height: 350px;overflow: scroll;"> -->
+    <div *ngIf='showDropUp2' class="dropup" style="position: fixed; bottom:0px;width: 100%;background: #fff;max-height: 350px;overflow: scroll;z-index: 99999;border-radius: 32px 32px 0 0;box-shadow: 10px 5px 25px #000;">
+        <div style="display: flex;">
+            <div style="list-style: none; padding: 10px 13px; margin-bottom: 0;margin-top: 10px;font-size: 14px;">
+                <div *ngFor="let row of berthAnchorageList?.vesselAnchorageList" class="d-flex">
+                    <div class="txt-trunc2" style="width:200px;font-weight: bold;">{{row?.vesselName}}</div>
+                    <div style="width:85px">SCN: {{row?.scn}}</div>
+                </div>
+            </div>
+            <div><i *ngIf="showDropUp2" class="fa fa-window-minimize" (click)="clearValue()"></i></div>
+        </div>
+    </div>
+
+    <!-- <div *ngIf='showDropUp3' class="dropup" style="position: fixed; bottom:0px;width: 100%;background: #fff;max-height: 371px;overflow: scroll;z-index: 99999;border-radius: 32px 32px 0 0;box-shadow: 10px 5px 25px #000;"> -->
+    <div *ngIf='showDropUp3' class="dropup" style="position: fixed; bottom:0px;width: 100%;background: #fff;max-height: 371px;z-index: 99999;border-radius: 32px 32px 0 0;box-shadow: 10px 5px 25px #000;">
+        <div class="pt-4 pl-2"> 
+        <!-- <div style="display: flex;"> -->
+            <!-- <div class="status-position">
+                  <ngx-charts-pie-grid 
+                    [results]="saleData"
+                    [view]="view1"
+                    [scheme]="colorScheme1"
+                  > </ngx-charts-pie-grid>
+            </div> -->
+            <div class="row">
+                <div class="col-6">
+                     <h3 class="custom-content-title mb-2"><b>Multi Purpose</b></h3>
+                     <!-- <p style="text-align: center;margin-bottom: -25px;">Total : {{declaredResults[0].total|number: '2.'}}</p> -->
+                     <p style="text-align: center;margin-bottom: -25px;">Total : {{multipurposeResults[0]?.total}}</p>
+                     <ngx-charts-pie-grid 
+                     [results]="multipurposeResults"
+                     [view]="viewStatus"
+                     [scheme]="colorSchemeMultipurpose"
+                     [designatedTotal]="multipurposeResults[0]?.total"
+                     [label]="'Multi Purpose'"
+                   > </ngx-charts-pie-grid>          
+                </div>
+                <div class="col-6">
+                     <h3 class="custom-content-title mb-2"><b>Container</b></h3>
+                     <p style="text-align: center;margin-bottom: -25px;">Total : {{containerResults[0]?.total}}</p>
+                     <ngx-charts-pie-grid 
+                     [results]="containerResults"
+                     [view]="viewStatus"
+                     [scheme]="colorSchemeContainer"
+                     [designatedTotal]="containerResults[0]?.total"
+                     [label]="'Container'"
+                   > </ngx-charts-pie-grid>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                     <h3 class="custom-content-title mb-2"><b>Liquid Bulk</b></h3>
+                     <p style="text-align: center;margin-bottom: -25px;">Total : {{liquidBulkResults[0]?.total}}</p>
+                     <ngx-charts-pie-grid 
+                     [results]="liquidBulkResults"
+                     [view]="viewStatus"
+                     [scheme]="colorSchemeLiquidBulk"
+                     [designatedTotal]="liquidBulkResults[0]?.total"
+                     [label]="'Liquid Bulk'"
+                   > </ngx-charts-pie-grid>          
+                </div>
+                <div class="col-6">
+                     <h3 class="custom-content-title mb-2"><b>New Deep Water</b></h3>
+                     <p style="text-align: center;margin-bottom: -25px;">Total : {{newDeepWaterResults[0]?.total}}</p>
+                     <ngx-charts-pie-grid 
+                     [results]="newDeepWaterResults"
+                     [view]="viewStatus"
+                     [scheme]="colorSchemeNewDeepWater"
+                     [designatedTotal]="newDeepWaterResults[0]?.total"
+                     [label]="'New Deep Water'"
+                   > </ngx-charts-pie-grid>
+                </div>
+              </div>
+            <div><i *ngIf="showDropUp3" class="fa fa-window-minimize" (click)="clearValue()"></i></div>
+        </div>
+    </div>
+
+
+</div>

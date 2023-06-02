@@ -1,0 +1,186 @@
+/* start user,password icons css */
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+/* .mainLoginInput{
+  height: 40px;
+  padding: 0px;
+  font-size: 30px;
+  margin: 5px 0;
+} */
+.mainLoginInput::-webkit-input-placeholder { 
+font-family: FontAwesome;
+font-weight: normal;
+overflow: visible;
+vertical-align: top;
+display: inline-block !important;
+padding-left: 5px;
+padding-top: 2px;
+/* color: hsl(9, 40%, 60%); */
+color: #ced4da(9, 40%, 60%);
+}
+.mainLoginInput::-moz-placeholder  { 
+font-family: FontAwesome;
+font-weight: normal;
+overflow: visible;
+vertical-align: top;
+display: inline-block !important;
+padding-left: 5px;
+padding-top: 2px;
+/* color: hsl(9, 40%, 60%); */
+color: #ced4da(9, 40%, 60%);
+}
+.mainLoginInput:-ms-input-placeholder  { 
+font-family: FontAwesome;
+font-weight: normal;
+overflow: visible;
+vertical-align: top;
+display: inline-block !important;
+padding-left: 5px;
+padding-top: 2px;
+/* color: hsl(9, 40%, 60%); */
+color: #ced4da(9, 40%, 60%);
+}
+/* end user,password icons css */
+
+
+
+
+/* start eye icon css */
+.password-container{
+  /* width: 400px; */
+  position: relative;
+}
+.password-container input[type="password"],
+.password-container input[type="text"]{
+  width: 100%;
+  padding: 12px 36px 12px 12px;
+  box-sizing: border-box;
+}
+.fa-eye{
+  position: absolute;
+  top: 28%;
+  right: 4%;
+  cursor: pointer;
+  color: white;
+}
+.fa-eye-slash{
+  position: absolute;
+  top: 28%;
+  right: 4%;
+  cursor: pointer;
+  color: white;
+}
+/* end eye icon css */
+
+
+/* .loginbox {
+  background: #f8f9fa;
+  border-radius: 30px;
+  padding: 3vw;
+} */
+
+.btn-width{
+  margin-top: 16px;
+  width: 265px;
+}
+.custom-form{
+  color: #fff !important;
+    background-color: transparent !important;
+    border-radius: 20px !important;
+    border: 1px solid #fff !important;
+}
+::placeholder { color: #fff !important; opacity: 0.5;}
+/* .custom-btn{border-radius: 20px;background: linear-gradient(90deg, rgba(81,38,236,1) 0%, rgb(152 116 240) 47%, #d598d3 100%) !important} */
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+@media only screen and (min-width: 916px) {
+  .loginbox {
+    background: #f8f9fa;
+    border-radius: 30px;
+    padding: 3vw;
+  }
+  .btn-width{
+    margin-top: 16px;
+    width: 130px;
+  }
+}
+.form-signin {
+  width: 100%;
+  max-width: 530px;
+  padding: 45px;
+  margin: 0 auto;
+}
+/* .form-signin1{
+  max-width: 530px;
+  padding-right: 92px;
+  margin: 0 auto;
+  text-align: center;
+} */
+
+.form-signin1{
+  max-width: 530px;
+  padding-right: 45px;
+  padding-left: 45px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.subtitle {
+  color: #66ccff;
+  margin-top: 4vh;
+  font-size: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-bottom: 0;
+  font-weight: bolder;
+}
+
+.subtitle1 {
+color: black;
+margin-top: 3vh;
+font-size: 12px;
+/* padding-left: 27px;
+padding-right: 53px; */
+/* padding-top: 25px; */
+padding-bottom: 14px;
+margin-bottom: 0;
+text-align: center;
+font-weight: 500;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.label {
+  display: inline-block;
+  margin-top: 0.5rem;
+  float: left;
+}
+.ijm_logo {
+  max-width: 50%;
+  margin-top: 5vh;
+}
+.bg-login{
+  /* background-image:linear-gradient(#00477a,rgb(3 45 60 / 65%)), url('../../../assets/css/images/port8.jpg'); */
+  background-image: linear-gradient(#410170,rgb(12 0 14 / 85%)), url('../../../assets/css/images/port8.jpg');
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+/* .labelStyle{
+  display: inline-block;
+  margin-top: 0.5rem;
+  float: left;
+  font-family:Open sans-serif;
+  color: blue;
+  font-weight: bold;
+} */
+
+/* .btn-primary{
+  background: #1fb8da;
+  border: none;
+} */

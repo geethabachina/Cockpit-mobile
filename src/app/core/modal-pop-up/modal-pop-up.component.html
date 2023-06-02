@@ -1,0 +1,67 @@
+
+<!----------------------------------------------- Phone Number modal --------------------------------------------------->
+<form *ngIf="title=='Call'">
+  <div class="pt-2 pr-3 mb-2">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: #5126ec;font-weight: 600;font-family: Cedarville Cursive;">{{title}}</h5>
+          <button type="button" (click)="modalRef.hide()" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  </div>
+  <div class="modal-body">
+    <!-- <div class="container text-center"> -->
+    <div class="text-center">
+      <!-- <label class="pull-left label-style table-f-color">Ahmad John (+600190909090)</label> -->
+      <label>{{data?.name}} ({{data?.phoneNo}})</label>
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block">
+    <div class="row p-0">
+      <div class="col-6 text-center">
+        <!-- <a [href]="'tel:' + data.phoneNo"><span class="btn btn-primary" style="width:100%;">Call&nbsp;&nbsp;&nbsp;<i class="fa fa-phone"></i></span></a> -->
+        <span class="btn btn-primary" style="width:100%;">Call&nbsp;&nbsp;&nbsp;<i class="fa fa-phone"></i></span>
+      </div>
+      <div class="col-6 text-center">
+        <button type="submit" class="btn btn-primary-cancel" (click)="modalRef.hide()" style="width:100%;">Cancel&nbsp;&nbsp;&nbsp;<i class="fa fa-ban" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!----------------------------------------------- Logout modal --------------------------------------------------->
+ <form *ngIf="title=='Logout'" >
+    <div class="pt-2 pr-3 mb-2">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: #5126ec;font-weight: 600;font-family: Cedarville Cursive;">{{title}}</h5>
+            <button type="button" (click)="modalRef.hide()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+    </div>
+    <div class="modal-body">
+      <div class="container text-center">
+        <p>Are you sure?</p>
+      </div>
+    </div>
+    <div class="modal-footer" style="display: block">
+      <div class="row p-0">
+        <div class="col-6 text-center">
+          <button type="submit" (click)="onSubmit()" class="btn no-bk mauto d-flex align-items-center px-6">
+            <img class="acc-dec-icon mr-3" src="../../../../assets/css/images/accepted.png" alt="">
+            <p class="mb-0">Yes</p>
+          </button>
+        </div>
+        <div class="col-6 text-center">
+          <button type="button" (click)="modalRef.hide()" class="btn no-bk mauto d-flex align-items-center px-6">
+              <img class="acc-dec-icon mr-3" src="../../../../assets/css/images/declined.png" alt="">
+              <p class="mb-0">No</p>
+          </button>
+        </div>
+      </div>
+    </div>
+</form>
+
+
+  
+  
